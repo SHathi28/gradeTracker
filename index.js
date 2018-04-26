@@ -70,14 +70,19 @@ function createAccount() {
 		ret = false;
 	}
 
-	if (ret != false) {
-		window.location.href = "../main.html"
-	}
-}
+	var username = usernameFlag.value;
+	var password = passwordFlag.value;
 
-firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-	// Handle Errors here.
-	var errorCode = error.code;
-	var errorMessage = error.message;
-	// ...
-});
+	firebase.auth().createUserWithEmailAndPassword(username, password).then(function (result) {
+		console.log("Created user");
+		console.log(result)
+		window.location.href = '../main.html';
+	}).catch(function(error) {
+		var errorCode = error.code;
+		var errorMessage = error.message;
+		console.log(errorCode);
+		console.log(errorMessage);
+		console.log("Error");
+		return;
+	});
+}
