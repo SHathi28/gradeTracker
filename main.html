@@ -159,7 +159,7 @@
 					<td> <input type="number" readonly id="attTotal" value="0"> </td>
 				</tr>
 			</table>
-			<button type="submit" onclick="calcAttendance()">Calculate Homework Grade </button>	
+			<button type="submit" onclick="calcAttendance()">Calculate Attendance Grade </button>	
 			
 		</div>
 		
@@ -169,26 +169,32 @@
 				<tr style="font-weight: bold; text-align: center;">
 					<td> Name </td>
 					<td> Received Points</td>
+					<td> % Weight </td>
 				</tr>
 				<tr>
 					<td> Projects </td>
 					<td> <input value="0" type="number" readonly id="projOverall"> </td>
+					<td> <input value="0" type="number" id="projWeight"> </td>
 				</tr>
 				<tr>
 					<td> Midterm </td>
 					<td> <input value="0" type="number" readonly id="midOverall"> </td>
+					<td> <input value="0" type="number" id="midWeight"> </td>
 				</tr>
 				<tr>
 					<td> Final </td>
 					<td> <input value="0" type="number" readonly id="finOverall"> </td>
+					<td> <input value="0" type="number" id="finWeight"> </td>
 				</tr>
 				<tr>
 					<td> Attendance </td>
 					<td> <input value="0" type="number" readonly id="attOverall"> </td>
+					<td> <input value="0" type="number" id="attWeight"> </td>
 				</tr>
 				<tr>
 					<td> TOTAL </td>
 					<td> <input readonly id="overallTotal"> </td>
+					<td> <input readonly id="overallWeight"> </td>
 				</tr>
 			</table>
 			<button type="submit" onclick="calcOverall()"> Calculate Overall Grade </button>
