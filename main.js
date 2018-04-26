@@ -64,10 +64,16 @@ function calcOverall() {
 	var attRec = document.getElementById("attInput");
 	var attTot = document.getElementById("attTotal");
 	
-	var projWeight = Number(Number(projRec.value) / Number(projTot.value)) * 100 * 0.4;
-	var midWeight = Number(Number(midIn.value) / Number(midTotal.value)) * 100 * 0.3;
-	var finWeight = Number(Number(finIn.value) / Number(finTotal.value)) * 100 * 0.2;
-	var attWeight = Number(Number(attRec.value) / Number(attTot.value)) * 100 * 0.1;
+	var weightProj = document.getElementById("projWeight");
+	var weightMid = document.getElementById("midWeight");
+	var weightFin = document.getElementById("finWeight");
+	var weightAtt = document.getElementById("attWeight");
+	
+	
+	var projWeight = Number(Number(projRec.value) / Number(projTot.value)) * 100 * Number(Number(weightProj.value)/100);
+	var midWeight = Number(Number(midIn.value) / Number(midTotal.value)) * 100 * (Number(weightMid.value)/100);
+	var finWeight = Number(Number(finIn.value) / Number(finTotal.value)) * 100 * (Number(weightFin.value)/100);
+	var attWeight = Number(Number(attRec.value) / Number(attTot.value)) * 100 * (Number(weightAtt.value)/100);
 	
 	console.log("Proj Weight " + projWeight);
 	console.log("Mid Weight " + midWeight);
@@ -79,7 +85,10 @@ function calcOverall() {
 	document.getElementById("finOverall").value = Number(finWeight.toFixed(2));
 	document.getElementById("attOverall").value = Number(attWeight.toFixed(2));
 	
+	var weightage = Number(weightProj.value) + Number(weightMid.value) + Number(weightFin.value) + Number(weightAtt.value);
+	document.getElementById("overallWeight").value = weightage;
+	
 	var total = projWeight + midWeight + finWeight + attWeight;
-	document.getElementById("overallTotal").value = total;
+	document.getElementById("overallTotal").value = Number(total.toFixed(2));
 }
 
