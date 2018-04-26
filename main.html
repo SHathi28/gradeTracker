@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title> CS252 Grade Tracker</title>
+	<script src="main.js"> </script>
+</head>
+
+
+<style>
+	html {
+		height: 150%;
+		background: linear-gradient(to left top, #dce35b, #45b649);
+	}
+
+	.title {
+		font-size: 40px;
+		font-weight: bolder;
+		text-align: center;
+	}
+
+	.projects {
+		border: 3px solid black;
+		width: 400px;
+		text-align: center;
+		background-color: orange;
+	}
+
+	.miniTitle {
+		font-size: 20px;
+		font-weight: bold;
+	}
+
+	.homework {
+		border: 3px solid black;
+		width: 400px;
+		text-align: center;
+		background-color: cadetblue;
+	}
+
+	.exams {
+		margin-left: 700px;
+		border: 3px solid black;
+		text-align: center;
+		width: 400px;
+		background-color: yellow;
+		display: inline-block;
+	}
+
+	.overall {
+		margin-left: 700px;
+		border: 3px solid black;
+		width: 400px;
+		background-color: violet;
+		text-align: center;
+	}
+
+	table {
+		width: 100%;
+		text-align: left;
+	}
+</style>
+
+<body>
+	<p class="title"> CS252 Grade Tracker </p>
+	<div class="row1">
+		<div class="projects">
+			<p class="miniTitle"> Projects</p>
+			<table class="table">
+				<tr style="font-weight: bold; text-align: center;">
+					<td> Name </td>
+					<td> Received Points</td>
+					<td> Total Points </td>
+				</tr>
+				<tr>
+					<td> Project 1 </td>
+					<td> <input value="0" type="number" id="project1input"> </td>
+					<td> <input value="0" type="number" id="project1total"> </td>
+				</tr>
+				<tr>
+					<td> Project 2 </td>
+					<td> <input value="0" type="number" id="project2input"> </td>
+					<td> <input value="0" type="number" id="project2total"> </td>
+				</tr>
+				<tr>
+					<td> Project 3 </td>
+					<td> <input value="0" type="number" id="project3input"> </td>
+					<td> <input value="0" type="number" id="project3total">  </td>
+				</tr>
+				<tr>
+					<td> Project 4 </td>
+					<td> <input value="0" type="number" id="project4input"> </td>
+					<td> <input value="0" type="number" id="project4total"> </td>
+				</tr>
+				<tr>
+					<td> Project 5 </td>
+					<td> <input value="0" type="number" id="project5input"> </td>
+					<td> <input value="0" type="number" id="project5total"> </td>
+				</tr>
+				<tr>
+					<td> Project 6 </td>
+					<td> <input value="0" type="number" id="project6input"> </td>
+					<td> <input value="0" type="number" id="project6total"> </td>
+				</tr>
+				<tr>
+					<td> TOTAL </td>
+					<td> <input type="number" readonly id="projectsinput" value="0"> </td>
+					<td> <input type="number" readonly id="projecttotal" value="0"> </td>
+				</tr>
+			</table>
+			<button onclick="calcProjs()"> Calculate Projects Grade </button>
+		</div>
+		
+		<div class="exams">
+			<p class="miniTitle"> Exams </p>
+			<table>
+				<tr style="font-weight: bold; text-align: center;">
+					<td> Name </td>
+					<td> Received Points</td>
+					<td> Total Points </td>
+				</tr>
+				<tr>
+					<td> Midterm </td>
+					<td> <input value="0" type="number" id="midInput"> </td>
+					<td> <input value="0" type="number" id="midTotal"> </td>
+				</tr>
+				<tr>
+					<td> Final </td>
+					<td> <input value="0" type="number" id="finInput"> </td>
+					<td> <input value="0" type="number" id="finTotal"> </td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<div>
+		<div class="homework">
+			<p class="miniTitle"> Attendance </p>
+			<table>
+				<tr style="font-weight: bold; text-align: center;">
+					<td> Name </td>
+					<td> Received Points</td>
+					<td> Total Points </td>
+				</tr>
+				<tr>
+					<td> Class Attendance </td>
+					<td> <input value="0" type="number" id="classInput"> </td>
+					<td> <input value="0" type="number" id="classTotal"> </td>
+				</tr>
+				<tr>
+					<td> Lab Attendance </td>
+					<td> <input value="0" type="number" id="labInput"> </td>
+					<td> <input value="0" type="number" id="labTotal"> </td>
+				</tr>
+				<tr>
+					<td> TOTAL </td>
+					<td> <input type="number" readonly id="attInput" value="0"> </td>
+					<td> <input type="number" readonly id="attTotal" value="0"> </td>
+				</tr>
+			</table>
+			<button type="submit" onclick="calcAttendance()">Calculate Homework Grade </button>	
+			
+		</div>
+		
+		<div class="overall">
+			<p class="miniTitle"> Overall Grade</p>
+			<table class="table" style="width: 50%;">
+				<tr style="font-weight: bold; text-align: center;">
+					<td> Name </td>
+					<td> Received Points</td>
+				</tr>
+				<tr>
+					<td> Projects </td>
+					<td> <input value="0" type="number" readonly id="projOverall"> </td>
+				</tr>
+				<tr>
+					<td> Midterm </td>
+					<td> <input value="0" type="number" readonly id="midOverall"> </td>
+				</tr>
+				<tr>
+					<td> Final </td>
+					<td> <input value="0" type="number" readonly id="finOverall"> </td>
+				</tr>
+				<tr>
+					<td> Attendance </td>
+					<td> <input value="0" type="number" readonly id="attOverall"> </td>
+				</tr>
+				<tr>
+					<td> TOTAL </td>
+					<td> <input readonly id="overallTotal"> </td>
+				</tr>
+			</table>
+			<button type="submit" onclick="calcOverall()"> Calculate Overall Grade </button>
+		</div>
+	</div>
+
+
+</body>
+
+</html>
