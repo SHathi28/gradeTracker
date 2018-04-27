@@ -1,3 +1,4 @@
+//SWITCHES THE SIGN-IN PAGE TO CREATE ACCOUNT PAGE
 function signinToCreate() {
 	document.getElementById("title").innerHTML = "Create Account";
 	document.getElementById("sign").setAttribute("hidden", "hidden");
@@ -7,6 +8,7 @@ function signinToCreate() {
 	document.getElementById("signInPassword").setAttribute("placeholder", "Password");
 }
 
+//SWITCHES THE CREATE ACCOUNT PAGE TO THE SIGN-IN PAGE
 function createToSignIn() {
 	document.getElementById("title").innerHTML = "Sign-In";
 	document.getElementById("create").setAttribute("hidden", "hidden");
@@ -16,6 +18,7 @@ function createToSignIn() {
 	document.getElementById("createPassword").setAttribute("placeholder", "Password");
 }
 
+//CODE FOR SIGNING THE USER INTO THE ACCOUNT
 function signIn() {
 	var ret = true;
 	var usernameFlag = document.getElementById("signInUsername");
@@ -41,10 +44,13 @@ function signIn() {
 	console.log(email);
 	console.log(password);
 
+	//CODE TO CHECK WITH THE FIREBASE DATABASE THAT THE USER HAS AN ACCOUNT
+	//IF THE USER HAS AN ACCOUNT THE PAGE SIGN-S IN OTHERWISE DOES NOTHING
 	firebase.auth().signInWithEmailAndPassword(email, password).then(function (result) {
 		console.log(result);
 		window.location.href = 'main.html';
 	}).catch(function (error) {
+		document.getElementById("title").innerHTML = "Invalid Username/Password";
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		console.log(errorCode);
@@ -54,6 +60,7 @@ function signIn() {
 	});
 }
 
+//CODE FOR ALLOWING THE USER TO CREATE AN ACCOUNT
 function createAccount() {
 	var ret = true;
 	var nameFlage = document.getElementById("createName");
@@ -83,6 +90,7 @@ function createAccount() {
 	
 	window.localStorage.setItem("login", temp);
 
+	//CODE TO ALLOW THE USER TO CREATE AN ACCOUNT AND PUT IT INTO THE FIREBASE DATABASE
 	firebase.auth().createUserWithEmailAndPassword(username, password).then(function (result) {
 		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
@@ -111,15 +119,4 @@ function createAccount() {
 		console.log("Error");
 		return;
 	});
-}
-
-function removeAt(email) {
-	var ret = "";
-	var i = 0;
-	while(email.charAt(i) != '@') {
-		ret += email.charAt(i);
-		i++;
-	}
-	
-	return ret;
 }

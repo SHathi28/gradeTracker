@@ -1,8 +1,10 @@
 var database = firebase.database();
 var email = window.localStorage.getItem("login");
 
+//TODO: LOADS THE USER DATA FROM FIREBASE AND DSIPLAYS WHEN THEY LOG IN
 function loadData() {
 	console.log(email);
+	//RETRIEVES THE USER'S PROJECT GRADES
 	firebase.database().ref(email + "projects/").once('value').then(function (snapshot) {
 		var p1In = snapshot.val().project1Input;
 		var p2In = snapshot.val().project2Input;
@@ -39,6 +41,7 @@ function loadData() {
 		document.getElementById("projecttotal").value = ovrTot;
 	});
 
+	//RETRIEVES THE USER'S EXAM GRADES
 	firebase.database().ref(email + "exams/").once('value').then(function (snapshot) {
 		var midIn = snapshot.val().midtermInput;
 		var midTot = snapshot.val().midtermTotal;
@@ -57,6 +60,7 @@ function loadData() {
 		document.getElementById("examTotal").value = examTot;
 	});
 
+	//RETRIEVES THE USER'S ATTENDANCE GRADES
 	firebase.database().ref(email + "attendance/").once('value').then(function (snapshot) {
 		var classIn = snapshot.val().classInput;
 		var classTot = snapshot.val().classTotal;
@@ -74,7 +78,8 @@ function loadData() {
 		document.getElementById("attInput").value = attIn;
 		document.getElementById("attTotal").value = attTot;
 	});
-
+	
+	//RETRIEVES THE USER'S OVERALL GRADES
 	firebase.database().ref(email + "overall/").once('value').then(function (snapshot) {
 		var projects = snapshot.val().projTotal;
 		var midterm = snapshot.val().midTotal;
@@ -90,7 +95,7 @@ function loadData() {
 	});
 }
 
-
+//CALCULATES THE USER'S PROJECT GRADES
 function calcProjs() {
 	//Get Inputs for Projects
 	var p1Input = document.getElementById("project1input");
@@ -114,6 +119,7 @@ function calcProjs() {
 	document.getElementById("projectsinput").value = received;
 	document.getElementById("projecttotal").value = total;
 
+	//LOADS THE USER'S PROJECT VALUES INTO THE FIREBASE DATABASE
 	firebase.database().ref(email + "projects/").set({
 		project1Input: Number(p1Input.value),
 		project1Total: Number(p1Total.value),
@@ -138,6 +144,7 @@ function calcProjs() {
 	});
 }
 
+//CALCULATES THE EXAM GRADES
 function calcExams() {
 	var midIn = document.getElementById("midInput");
 	var finIn = document.getElementById("finInput");
@@ -151,6 +158,7 @@ function calcExams() {
 	document.getElementById("examInput").value = received;
 	document.getElementById("examTotal").value = total;
 
+	//LOADS THE USER'S EXAM VALUES INTO THE FIREBASE DATABASE
 	firebase.database().ref(email + "exams/").set({
 		midtermInput: Number(midIn.value),
 		midtermTotal: Number(midTotal.value),
@@ -164,6 +172,7 @@ function calcExams() {
 
 }
 
+//CALCULATES THE USER'S ATTENDANCE GRADES
 function calcAttendance() {
 	var hw1In = document.getElementById("classInput");
 	var hw1Tot = document.getElementById("classTotal");;
@@ -177,6 +186,7 @@ function calcAttendance() {
 	document.getElementById("attInput").value = received;
 	document.getElementById("attTotal").value = total;
 
+	//LOADS THE USER'S ATTENDANCE SCORES TO THE FIREBASE DATABASE
 	firebase.database().ref(email + "attendance/").set({
 		classInput: Number(hw1In.value),
 		classTotal: Number(hw1Tot.value),
@@ -189,6 +199,7 @@ function calcAttendance() {
 	});
 }
 
+//CALCULATE THE USER'S OVERALL GRADES
 function calcOverall() {
 	var projRec = document.getElementById("projectsinput");
 	var projTot = document.getElementById("projecttotal");
@@ -223,6 +234,7 @@ function calcOverall() {
 	var total = projWeight + midWeight + finWeight + attWeight;
 	document.getElementById("overallTotal").value = Number(total.toFixed(2));
 
+	//LOADS THE USER'S OVERALL GRADES INTO THE THE FIREBASE DATABASE
 	firebase.database().ref(email + "overall/").set({
 		projTotal: Number(projWeight),
 		midTotal: Number(midWeight),
