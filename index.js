@@ -43,7 +43,7 @@ function signIn() {
 
 	firebase.auth().signInWithEmailAndPassword(email, password).then(function (result) {
 		console.log(result);
-		window.location.href = 'https://shathi28.github.io/gradeTracker/main.html';
+		window.location.href = '..gradeTracker/main.html';
 	}).catch(function (error) {
 		var errorCode = error.code;
 		var errorMessage = error.message;
