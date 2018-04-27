@@ -1,8 +1,8 @@
 var database = firebase.database();
 var email = window.localStorage.getItem("login");
-email = email.substring(0, email.lastIndexOf("@"));
 
 function loadData() {
+	console.log(email);
 	firebase.database().ref(email + "projects/").once('value').then(function (snapshot) {
 		var p1In = snapshot.val().project1Input;
 		var p2In = snapshot.val().project2Input;
