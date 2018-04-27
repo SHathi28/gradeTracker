@@ -94,7 +94,7 @@ function createAccount() {
 				}).then(function () {
 					// Update successful.
 					console.log("Update successful");
-					window.location.href = '../main.html';
+					window.location.href = '..gradeTracker/main.html';
 				}).catch(function (error) {
 					// An error happened.
 					console.log("error occured");
