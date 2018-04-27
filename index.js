@@ -32,6 +32,11 @@ function signIn() {
 
 	var email = usernameFlag.value;
 	var password = passwordFlag.value;
+	
+	var temp = email.substring(0, email.lastIndexOf("@"));
+	console.log("Temp: " + temp);
+		
+	window.localStorage.setItem("login", temp);
 
 	console.log(email);
 	console.log(password);
@@ -72,6 +77,11 @@ function createAccount() {
 
 	var username = usernameFlag.value;
 	var password = passwordFlag.value;
+	
+	var temp = username.substring(0, username.lastIndexOf("@"));
+	console.log("Temp: " + temp);
+	
+	window.localStorage.setItem("login", temp);
 
 	firebase.auth().createUserWithEmailAndPassword(username, password).then(function (result) {
 		firebase.auth().onAuthStateChanged(function (user) {
@@ -101,4 +111,15 @@ function createAccount() {
 		console.log("Error");
 		return;
 	});
+}
+
+function removeAt(email) {
+	var ret = "";
+	var i = 0;
+	while(email.charAt(i) != '@') {
+		ret += email.charAt(i);
+		i++;
+	}
+	
+	return ret;
 }

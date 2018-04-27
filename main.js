@@ -1,9 +1,9 @@
 var database = firebase.database();
-var name;
+var email = window.localStorage.getItem("login");
+email = email.substring(0, email.lastIndexOf("@"));
 
 function loadData() {
-	console.log("Load Data");
-	firebase.database().ref("projects/").once('value').then(function (snapshot) {
+	firebase.database().ref(email + "projects/").once('value').then(function (snapshot) {
 		var p1In = snapshot.val().project1Input;
 		var p2In = snapshot.val().project2Input;
 		var p3In = snapshot.val().project3Input;
@@ -39,7 +39,7 @@ function loadData() {
 		document.getElementById("projecttotal").value = ovrTot;
 	});
 
-	firebase.database().ref("exams/").once('value').then(function (snapshot) {
+	firebase.database().ref(email + "exams/").once('value').then(function (snapshot) {
 		var midIn = snapshot.val().midtermInput;
 		var midTot = snapshot.val().midtermTotal;
 
@@ -57,7 +57,7 @@ function loadData() {
 		document.getElementById("examTotal").value = examTot;
 	});
 
-	firebase.database().ref("attendance/").once('value').then(function (snapshot) {
+	firebase.database().ref(email + "attendance/").once('value').then(function (snapshot) {
 		var classIn = snapshot.val().classInput;
 		var classTot = snapshot.val().classTotal;
 
@@ -75,7 +75,7 @@ function loadData() {
 		document.getElementById("attTotal").value = attTot;
 	});
 
-	firebase.database().ref("overall/").once('value').then(function (snapshot) {
+	firebase.database().ref(email + "overall/").once('value').then(function (snapshot) {
 		var projects = snapshot.val().projTotal;
 		var midterm = snapshot.val().midTotal;
 		var final = snapshot.val().finTotal;
@@ -83,9 +83,9 @@ function loadData() {
 		var total = snapshot.val().overallTotal;
 
 		document.getElementById("projOverall").value = projects.toFixed(2);
-		document.getElementById("midOverall").value  = midterm.toFixed(2);
-		document.getElementById("finOverall").value  = final.toFixed(2);
-		document.getElementById("attOverall").value  = attendance.toFixed(2);
+		document.getElementById("midOverall").value = midterm.toFixed(2);
+		document.getElementById("finOverall").value = final.toFixed(2);
+		document.getElementById("attOverall").value = attendance.toFixed(2);
 		document.getElementById("overallTotal").value = total.toFixed(2);
 	});
 }
@@ -114,10 +114,7 @@ function calcProjs() {
 	document.getElementById("projectsinput").value = received;
 	document.getElementById("projecttotal").value = total;
 
-	console.log(Number(p1Input.value));
-	console.log(Number(p1Total.value));
-
-	firebase.database().ref("projects/").set({
+	firebase.database().ref(email + "projects/").set({
 		project1Input: Number(p1Input.value),
 		project1Total: Number(p1Total.value),
 
@@ -154,7 +151,7 @@ function calcExams() {
 	document.getElementById("examInput").value = received;
 	document.getElementById("examTotal").value = total;
 
-	firebase.database().ref("exams/").set({
+	firebase.database().ref(email + "exams/").set({
 		midtermInput: Number(midIn.value),
 		midtermTotal: Number(midTotal.value),
 
@@ -180,7 +177,7 @@ function calcAttendance() {
 	document.getElementById("attInput").value = received;
 	document.getElementById("attTotal").value = total;
 
-	firebase.database().ref("attendance/").set({
+	firebase.database().ref(email + "attendance/").set({
 		classInput: Number(hw1In.value),
 		classTotal: Number(hw1Tot.value),
 
@@ -210,16 +207,10 @@ function calcOverall() {
 	var weightFin = document.getElementById("finWeight");
 	var weightAtt = document.getElementById("attWeight");
 
-
 	var projWeight = Number(Number(projRec.value) / Number(projTot.value)) * 100 * Number(Number(weightProj.value) / 100);
 	var midWeight = Number(Number(midIn.value) / Number(midTotal.value)) * 100 * (Number(weightMid.value) / 100);
 	var finWeight = Number(Number(finIn.value) / Number(finTotal.value)) * 100 * (Number(weightFin.value) / 100);
 	var attWeight = Number(Number(attRec.value) / Number(attTot.value)) * 100 * (Number(weightAtt.value) / 100);
-
-	console.log("Proj Weight " + projWeight);
-	console.log("Mid Weight " + midWeight);
-	console.log("Fin Weight " + finWeight);
-	console.log("Att Weight " + attWeight);
 
 	document.getElementById("projOverall").value = Number(projWeight.toFixed(2));
 	document.getElementById("midOverall").value = Number(midWeight.toFixed(2));
@@ -232,12 +223,11 @@ function calcOverall() {
 	var total = projWeight + midWeight + finWeight + attWeight;
 	document.getElementById("overallTotal").value = Number(total.toFixed(2));
 
-	firebase.database().ref("overall/").set({
+	firebase.database().ref(email + "overall/").set({
 		projTotal: Number(projWeight),
 		midTotal: Number(midWeight),
 		finTotal: Number(finWeight),
 		attTotal: Number(attWeight),
 		overallTotal: Number(total),
 	});
-
 }
