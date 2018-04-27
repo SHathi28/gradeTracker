@@ -4,6 +4,27 @@
 
 <head>
 	<title> Grade Tracker Sign-In</title>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-database.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-messaging.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase-functions.js"></script>
+
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyDEGSy60jRPM1aY_huQH-kq74vvWYcd9-s",
+			authDomain: "gradetracker-ec0bd.firebaseapp.com",
+			databaseURL: "https://gradetracker-ec0bd.firebaseio.com",
+			projectId: "gradetracker-ec0bd",
+			storageBucket: "gradetracker-ec0bd.appspot.com",
+			messagingSenderId: "1058317821074"
+		};
+		firebase.initializeApp(config);
+
+	</script>
 	<script src="index.js"></script>
 </head>
 
@@ -71,6 +92,7 @@
 		font-size: 25px;
 		text-align: left;
 	}
+
 </style>
 
 <body>
@@ -118,10 +140,10 @@
 								<th> <input type="button" value="Go to Sign-In" id="signIn" onclick="createToSignIn()"> </th>
 								<th> <input type="button" value="Create Account" class="createAccount" onclick="createAccount()"> </th>
 							</tr>
-							
+
 						</table>
 
-						
+
 					</div>
 
 				</div>

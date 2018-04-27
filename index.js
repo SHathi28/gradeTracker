@@ -74,10 +74,26 @@ function createAccount() {
 	var password = passwordFlag.value;
 
 	firebase.auth().createUserWithEmailAndPassword(username, password).then(function (result) {
-		console.log("Created user");
-		console.log(result)
-		window.location.href = '../main.html';
-	}).catch(function(error) {
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				// User is signed in.
+				user = firebase.auth().currentUser;
+				var currUser = firebase.auth().currentUser;
+				currUser.updateProfile({
+					displayName: name
+				}).then(function () {
+					// Update successful.
+					console.log("Update successful");
+					window.location.href = '../main.html';
+				}).catch(function (error) {
+					// An error happened.
+					console.log("error occured");
+				});
+			} else {
+				// No user is signed in.
+			}
+		});
+	}).catch(function (error) {
 		var errorCode = error.code;
 		var errorMessage = error.message;
 		console.log(errorCode);
