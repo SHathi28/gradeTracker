@@ -11,4 +11,4 @@ URL:      https://shathi28.github.io/gradeTracker/
 
 GitHub:   https://github.com/SHathi28/gradeTracker/
 
-YouTube Video:  TBD
+YouTube Video:  https://youtu.be/5nJ1vY_CbCE
